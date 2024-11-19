@@ -11,6 +11,6 @@ namespace ServerGame106.Models
         [ForeignKey("Region")]
         public int RegionId { get; set; }
         public string? Avatar { get; set; }
-
+        public bool IsDeleted { get; set; } = false;
     }
 }
