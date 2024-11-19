@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ServerGame106.Models;
+using SeverGame106.Models;
 
 namespace ServerGame106.Data
 {
@@ -11,6 +12,7 @@ namespace ServerGame106.Data
         public DbSet<Question> Question { get; set; }
         public DbSet<Region> Region { get; set; }
         public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<LevelResult> levelResults {  get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
