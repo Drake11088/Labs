@@ -1,7 +1,22 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ServerGame106.Data;
+using ServerGame106.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddSwaggerGen( c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "SeverGame106", Version = "v1" });
+});
 
 var app = builder.Build();
 
@@ -15,6 +30,9 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SeverGame106"));
 
 app.UseRouting();
 
